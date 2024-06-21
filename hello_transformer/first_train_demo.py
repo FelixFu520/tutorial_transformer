@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 """
 
-第一次训练Transformer，Hello Transformer！
+第一次训练Transformer,Hello Transformer!
 
-通过一个玩具级的任务来学习transformer的训练，数据是人工构造的
+通过一个玩具级的任务来学习transformer的训练,数据是人工构造的
 
 use the following command to run:
 python first_train_demo.py 
@@ -50,7 +50,7 @@ class Batch:
 def data_gen(V, slen, batch, nbatches, device):
     """
     Generate random data for a src-tgt copy task.
-    V: 词典数量，取值范围[0, V-1]，约定0作为特殊符号使用代表padding
+    V: 词典数量,取值范围[0, V-1],约定0作为特殊符号使用代表padding
     slen: 生成的序列数据的长度
     batch: batch_size
     nbatches: number of batches to generate
@@ -63,11 +63,11 @@ def data_gen(V, slen, batch, nbatches, device):
         #tgt = Variable(data, requires_grad=False)
 
         data = torch.from_numpy(np.random.randint(2, V, size=(batch, slen)))
-        # 约定输出为输入除去序列第一个元素，即向后平移一位进行输出，同时输出数据要在第一个时间步添加一个起始符
-        # 因此，加入输入数据为  [3, 4, 2, 6, 4, 5]
+        # 约定输出为输入除去序列第一个元素,即向后平移一位进行输出,同时输出数据要在第一个时间步添加一个起始符
+        # 因此,加入输入数据为  [3, 4, 2, 6, 4, 5]
         # ground truth输出为 [1, 4, 2, 6, 4, 5]
         tgt_data = data.clone()
-        tgt_data[:, 0] = 1   # 将序列的第一个时间步置为1(即约定的起始符)，即可完成GT数据的构造
+        tgt_data[:, 0] = 1   # 将序列的第一个时间步置为1(即约定的起始符),即可完成GT数据的构造
         src = Variable(data, requires_grad=False)
         tgt = Variable(tgt_data, requires_grad=False)
         if device == "cuda":
@@ -153,7 +153,7 @@ class SimpleLossCompute:
         
     def __call__(self, x, y, norm):
         """
-        norm: loss的归一化系数，用batch中所有有效token数即可
+        norm: loss的归一化系数,用batch中所有有效token数即可
         """
         x = self.generator(x)
         x_ = x.contiguous().view(-1, x.size(-1))
@@ -203,7 +203,7 @@ for epoch in range(nrof_epochs):
 # greedy decode
 def greedy_decode(model, src, src_mask, max_len, start_symbol):
     memory = model.encode(src, src_mask)
-    # ys代表目前已生成的序列，最初为仅包含一个起始符的序列，不断将预测结果追加到序列最后
+    # ys代表目前已生成的序列,最初为仅包含一个起始符的序列,不断将预测结果追加到序列最后
     ys = torch.ones(1, 1).fill_(start_symbol).type_as(src.data)   
     for i in range(max_len-1):
         out = model.decode(memory, src_mask, 
