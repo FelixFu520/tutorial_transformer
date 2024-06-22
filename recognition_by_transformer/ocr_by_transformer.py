@@ -329,7 +329,7 @@ def judge_is_correct(pred, label):
 if __name__ == "__main__":
     base_data_dir = os.path.join(os.path.dirname(os.path.abspath(__file__)), 'ICDAR_2015')
     device = torch.device('cuda')  # 'cpu'或者'cuda'
-    nrof_epochs = 15  # 迭代次数，1500，根据需求进行修正
+    nrof_epochs = 1500  # 迭代次数，1500，根据需求进行修正
     batch_size = 64     # 批量大小，64，根据需求进行修正
     model_save_path = os.path.join(os.path.dirname(os.path.abspath(__file__)), "log", "ex1_ocr_model.pth")
     os.makedirs(os.path.dirname(model_save_path), exist_ok=True)
