@@ -1,5 +1,6 @@
 # by myself
-data/
+ICDAR_2015/
+log/
 .vscode-upload.json
 
 # Byte-compiled / optimized / DLL files
